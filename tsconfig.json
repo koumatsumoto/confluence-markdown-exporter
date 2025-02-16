@@ -1,10 +1,11 @@
 {
+  "include": ["main.ts", "src/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es2024",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
 
     "strict": true,
     "allowUnusedLabels": false,

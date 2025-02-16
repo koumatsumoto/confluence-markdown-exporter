@@ -2,14 +2,14 @@
   "name": "confluence-markdown-exporter",
   "version": "0.1.0",
   "description": "A tool to export Confluence pages as Markdown files",
-  "type": "module",
   "engines": {
     "node": ">=23.8.0"
   },
   "main": "main.ts",
   "scripts": {
-    "start": "node --env-file=.env main.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node main.ts",
+    "test": "vitest run --coverage"
   },
   "keywords": [
     "confluence",
@@ -20,6 +20,8 @@
   "author": "Kou Matsumoto",
   "devDependencies": {
     "@types/node": "^22.13.4",
-    "typescript": "^5.7.3"
+    "@vitest/coverage-v8": "^3.0.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
   }
 }
