@@ -1,0 +1,25 @@
+{
+  "name": "confluence-markdown-exporter",
+  "version": "0.1.0",
+  "description": "A tool to export Confluence pages as Markdown files",
+  "type": "module",
+  "engines": {
+    "node": ">=23.8.0"
+  },
+  "main": "main.ts",
+  "scripts": {
+    "start": "node --env-file=.env main.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "confluence",
+    "markdown",
+    "exporter",
+    "documentation"
+  ],
+  "author": "Kou Matsumoto",
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}
