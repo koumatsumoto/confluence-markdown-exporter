@@ -5,10 +5,11 @@
   "engines": {
     "node": ">=23.8.0"
   },
+  "type": "module",
   "main": "main.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node main.ts",
+    "start": "node --env-file=.env main.ts",
     "test": "vitest run --coverage"
   },
   "keywords": [
@@ -18,9 +19,13 @@
     "documentation"
   ],
   "author": "Kou Matsumoto",
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
   "devDependencies": {
     "@types/node": "^22.13.4",
     "@vitest/coverage-v8": "^3.0.5",
+    "msw": "^2.7.0",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
   }

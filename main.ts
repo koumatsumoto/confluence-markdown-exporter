@@ -1,7 +1,7 @@
 import { main } from "./src/main.ts";
 
 try {
-  await main();
+  await main(process.env);
   process.exit(0);
 } catch (error) {
   console.error("Error:", error);
