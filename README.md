@@ -25,3 +25,13 @@ A tool to export Confluence pages as Markdown files. Easily download and convert
    ```bash
    npm install
    ```
+
+### Environment Setup
+
+1. Copy the environment variable template:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` with your Confluence credentials and settings
