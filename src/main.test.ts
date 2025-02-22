@@ -1,6 +1,12 @@
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import { main } from "./main";
+import { vi } from "vitest";
+import * as fileUtils from "./fileUtils";
+
+vi.mock("./fileUtils", () => ({
+  saveTextFile: vi.fn().mockResolvedValue(undefined),
+}));
 
 const params = {
   CONFLUENCE_BASE_URL: "https://test.atlassian.net/wiki/api/v2",
@@ -14,9 +20,9 @@ const page = {
   id: "123",
   title: "page title",
   body: {
-    storage: {
-      value: "body content",
-      representation: "storage",
+    view: {
+      representation: "view",
+      value: "<h1>Title</h1><p>This is a paragraph</p>",
     },
   },
 };
@@ -26,7 +32,7 @@ export const restHandlers = [
     `${params.CONFLUENCE_BASE_URL}/pages/${params.DEFAULT_PAGE_ID}`,
     () => {
       return HttpResponse.json(page);
-    },
+    }
   ),
 ];
 
@@ -44,5 +50,14 @@ afterEach(() => server.resetHandlers());
 describe("main", () => {
   test("main should execute without errors", async () => {
     await expect(main(params)).resolves.not.toThrow();
+    expect(fileUtils.saveTextFile).toHaveBeenCalledTimes(2);
+    expect(fileUtils.saveTextFile).toHaveBeenCalledWith(
+      `${params.EXPORT_DIR}/page.html`,
+      page.body.view.value
+    );
+    expect(fileUtils.saveTextFile).toHaveBeenCalledWith(
+      `${params.EXPORT_DIR}/page.md`,
+      "# Title\n\nThis is a paragraph"
+    );
   });
 });
