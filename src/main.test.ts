@@ -26,7 +26,7 @@ export const restHandlers = [
     `${params.CONFLUENCE_BASE_URL}/pages/${params.DEFAULT_PAGE_ID}`,
     () => {
       return HttpResponse.json(page);
-    }
+    },
   ),
 ];
 

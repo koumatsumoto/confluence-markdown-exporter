@@ -1,5 +1,7 @@
 import { ConfluenceClient } from "./ConfluenceClient.ts";
 import { parseEnv } from "./parseEnv.ts";
+import { saveTextFile } from "./fileUtils.ts";
+import { convertHtmlToMarkdown } from "./convertHtmlToMarkdown.ts";
 
 export async function main(params: Record<string, string | undefined>) {
   const env = parseEnv(params);
@@ -12,9 +14,11 @@ export async function main(params: Record<string, string | undefined>) {
 
   const pageId = env.DEFAULT_PAGE_ID;
   const page = await client.getPage(pageId);
-  console.log(page);
-  const body = page.body.storage.value;
-  console.log("body", body);
+  const html = page.body.view.value;
+  await saveTextFile(`${env.EXPORT_DIR}/page.html`, html);
+
+  const markdown = convertHtmlToMarkdown(html);
+  await saveTextFile(`${env.EXPORT_DIR}/page.md`, markdown);
 
   return page;
 }
